@@ -36,6 +36,16 @@ public class LinkedList<T> implements List<T> {
     @Override
     public void add(T element) {
         // TODO
+
+        Link<T> tmp = new Link<>(element);
+       if (size > 0) {
+            last.next = tmp;
+            last = tmp;
+        }else{
+            head = tmp;
+            last = tmp;
+        }
+        size++;
     }
 
     @Override
@@ -45,6 +55,20 @@ public class LinkedList<T> implements List<T> {
         }
 
         // TODO
+            Link<T> newLink = new Link<>(element);
+            Link<T> tmp = head;
+            Link<T> current = tmp;
+            int index = 0;
+            while(index < position){
+                current = tmp;
+                tmp = tmp.next;
+
+                index++;
+            }
+            current.next = newLink;
+            newLink.next = tmp;
+            size++;
+
     }
 
     @Override
@@ -70,8 +94,15 @@ public class LinkedList<T> implements List<T> {
         }
 
         // TODO
+        Link<T> tmp = head;
+        int index = 0;
 
-        return null;
+        while(index < position){
+            tmp = tmp.next;
+            index++;
+        }
+
+        return tmp.element;
     }
 
     @Override
@@ -107,6 +138,22 @@ public class LinkedList<T> implements List<T> {
 
         return sb.toString();
     }
+
+    @Override
+    public void reset() {
+
+    }
+
+    @Override
+    public T next() {
+        return null;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
 
 }
 
