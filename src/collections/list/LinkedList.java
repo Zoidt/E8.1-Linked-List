@@ -68,7 +68,7 @@ public class LinkedList<T> implements List<T> {
         } else{
 
             // V1
-            // current is the index we want to put it in, not before
+            // current is the index we want to put it in (current = pos)
 //            Link<T> current = head;
 //            Link<T> previous = null;
 //
@@ -84,6 +84,7 @@ public class LinkedList<T> implements List<T> {
 //            size++;
 
             // How ian does it:
+            // current is the index before the spot we want to put it in (pos - 1)
             Link<T> current = head;
             for (int i = 0; i < position - 1; i++)
                 current = current.next;
