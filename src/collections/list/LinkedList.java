@@ -40,10 +40,9 @@ public class LinkedList<T> implements List<T> {
         Link<T> tmp = new Link<>(element);
        if (size > 0) {
             last.next = tmp;
-            last = tmp;
+            last = last.next;
         }else{
-            head = tmp;
-            last = tmp;
+            head = last =tmp;
         }
         size++;
     }
@@ -54,21 +53,47 @@ public class LinkedList<T> implements List<T> {
             throw new ListBoundsException();
         }
 
-        // TODO
-            Link<T> newLink = new Link<>(element);
-            Link<T> tmp = head;
-            Link<T> current = tmp;
-            int index = 0;
-            while(index < position){
-                current = tmp;
-                tmp = tmp.next;
+        // case 2: pos is size
+        if(position == size){
+            add(element);
+            return;
+        }
 
-                index++;
-            }
-            current.next = newLink;
-            newLink.next = tmp;
-            size++;
+        // case 1 : pos is 0
+        // case 3: pos is between 0 and size (pos >= 1 && pos < size)
+        if(position == 0){
+            Link<T> tmp = new Link<>(element);
+            tmp.next = head;
+            head = tmp;
+        } else{
 
+            // V1
+            // current is the index we want to put it in, not before
+//            Link<T> current = head;
+//            Link<T> previous = null;
+//
+//            for (int i = 0; i < position; i++) {
+//                previous = current;
+//                current = current.next;
+//            }
+//
+//            Link<T> tmp = new Link<>(element);
+//            previous.next = tmp;
+//            tmp.next = current;
+//
+//            size++;
+
+            // How ian does it:
+            Link<T> current = head;
+            for (int i = 0; i < position - 1; i++)
+                current = current.next;
+
+            Link<T> tmp = new Link<>(element);
+            tmp.next = current.next;
+            current.next = tmp;
+        }
+
+        size++;
     }
 
     @Override
