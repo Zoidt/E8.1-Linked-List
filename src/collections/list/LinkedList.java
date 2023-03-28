@@ -103,14 +103,56 @@ public class LinkedList<T> implements List<T> {
             throw new ListBoundsException();
         }
 
-        // TODO
+        T tmp;
 
-        return null;
+        // case 1: size is 1, pos is 0 (by default due to implementation)
+        if(size == 1){
+            tmp = head.element;
+            head = last = null;
+        }
+            // case 2: size is >1
+        else{
+
+            // subcase: pos is 0
+            if(position == 0){
+                tmp = head.element;
+                head = head.next;
+            }
+            // subcase: pos is size-1
+            else if(position == size - 1){
+                tmp = last.element; // save last element to return
+                Link<T> current = move(size - 2); // get before last link since remove is for last one
+
+                current.next = null; // remove link
+                last = current; // update last
+            }
+            else{ // position in the middle (pos is > 1 but < size-1)
+                Link<T> current = move(position - 1); // get link before the one we want to remove
+                tmp = current.next.element; // save element to return
+                current.next = current.next.next; // remove link (delete)
+            }
+
+        }
+
+        size--;
+
+        return tmp;
+    }
+
+    // helper method to find linked list after a certain number of steps
+    private Link<T> move(int position){
+
+        Link<T> current = head;
+        for (int i = 0; i < position; i++)
+            current = current.next;
+
+        return current;
     }
 
     @Override
     public void clear() {
-        // TODO
+        head = last = null;
+        size = 0;
     }
 
     @Override
@@ -120,13 +162,10 @@ public class LinkedList<T> implements List<T> {
         }
 
         // TODO
-        Link<T> tmp = head;
-        int index = 0;
+        if (position == size - 1)
+            return last.element;
 
-        while(index < position){
-            tmp = tmp.next;
-            index++;
-        }
+        Link<T> tmp = move(position);
 
         return tmp.element;
     }
@@ -136,9 +175,11 @@ public class LinkedList<T> implements List<T> {
         if (position < 0 || position >= size) {
             throw new ListBoundsException();
         }
-
+        Link<T> current = move(position);
+        T tmp = current.element;
+        current.element = element;
+        return tmp;
         // TODO
-        return null;
     }
 
     @Override
