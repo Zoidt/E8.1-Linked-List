@@ -211,6 +211,7 @@ public class LinkedList<T> implements List<T> {
 
     /**
      * Starts a new traversal from the beginning of the list.
+     * Starts a new traversal from the beginning of the list. Cursor is always on the next traversable element
      * @postcondition The cursor points to the first link in the list, or null if the list is empty.
      */
     @Override
