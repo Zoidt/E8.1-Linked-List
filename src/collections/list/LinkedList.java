@@ -4,6 +4,8 @@
 
 package collections.list;
 
+import collections.TraversalException;
+
 /**
  * An implementation of the List interface using unidirectional links, forming a "chain".
  *
