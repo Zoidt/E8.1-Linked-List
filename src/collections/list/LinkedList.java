@@ -210,7 +210,6 @@ public class LinkedList<T> implements List<T> {
     }
 
     /**
-     * Starts a new traversal from the beginning of the list.
      * Starts a new traversal from the beginning of the list. Cursor is always on the next traversable element
      * @postcondition The cursor points to the first link in the list, or null if the list is empty.
      */
@@ -222,9 +221,16 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T next() {
         // Check if has next
+        if (hasNext()){
+            T curr = cursor.element;
+            cursor = cursor.next;
+            // return current element
+            return curr;
+        }
+        else {
+            throw new TraversalException();
+        }
 
-        // if has next, then move traversal to next
-        return null;
     }
 
     @Override
