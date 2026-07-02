@@ -25,6 +25,7 @@ public class LinkedList<T> implements List<T> {
 
     private Link<T> head;
     private Link<T> last;  // a last reference is used to make list append operations `add(x)`, `add(size(), x)` more efficient
+    private Link<T> cursor;
     private int size;
 
     public LinkedList() {
@@ -206,19 +207,27 @@ public class LinkedList<T> implements List<T> {
         return sb.toString();
     }
 
+    /**
+     * Starts a new traversal from the beginning of the list.
+     * @postcondition The cursor points to the first link in the list, or null if the list is empty.
+     */
     @Override
     public void reset() {
-
+        cursor = head;
     }
 
     @Override
     public T next() {
+        // Check if has next
+
+        // if has next, then move traversal to next
         return null;
     }
 
     @Override
     public boolean hasNext() {
-        return false;
+        // check traversal.next, if it exists return true ,else return false
+        return cursor != null;
     }
 
 
