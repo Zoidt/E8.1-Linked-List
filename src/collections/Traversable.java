@@ -18,19 +18,19 @@ public interface Traversable<T> {
     void reset();
 
     /**
-     * Determine if a traversal can continue.
-     * @preconditions The traversal has been initialized and no modifications (ex: `add` or `remove` operations) have been performed since the initialization.
-     * @return `true` is there are elements left in the traversal, `false` otherwise.
-     */
-    T next();
-
-    /**
      * Return the current element in the traversal, and then advance the traversal cursor to the next element.
      * @preconditions The traversal has been initialized and no modifications (`add` or `remove` operations) have been performed
      *                since the initialization. The traversal still has at least one element left.
      * @postconditions If there is a next element, the traversal cursor has advanced to it and it is returned.
      *                 At the end of the traversal cursor is "undefined", meaning that is no longer refers to an element.
      * @return the next element in the traversal.
+     */
+    T next();
+
+    /**
+     * Determine if a traversal can continue.
+     * @preconditions The traversal has been initialized and no modifications (ex: `add` or `remove` operations) have been performed since the initialization.
+     * @return `true` is there are elements left in the traversal, `false` otherwise.
      */
     boolean hasNext();
 }
